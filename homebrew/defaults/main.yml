@@ -1,0 +1,29 @@
+---
+homebrew_install_path: /usr/local/homebrew
+
+homebrew_installed_packages:
+  - git
+  - vim
+  - ack
+  - tmux
+  - postgresql
+  - brew-cask
+
+homebrew_start_services_at_login:
+  - postgresql
+
+homebrew_upgrade_all_packages: no
+
+homebrew_taps:
+  - caskroom/cask
+
+homebrew_cask_apps:
+  - firefox
+  - google-chrome
+  - shiftit
+  - iterm2
+  - appcleaner
+  - hyperswitch
+  - atext
+
+homebrew_cask_appdir: /Applications

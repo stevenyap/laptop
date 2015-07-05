@@ -1,0 +1,24 @@
+---
+- name: Clone dotfiles
+  git: repo=https://github.com/stevenyap/dotfiles.git dest={{ home_directory }}/.dotfiles force=no update=no
+
+- name: Symlink dotfiles
+  file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
+  with_items:
+    - vimrc
+    - tmux.conf
+
+- name: source .dotfiles/.bash_profile in ~/.bash_profile
+  lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile >> ~/.bash_profile"
+
+- name: Clone Vim Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
+
+- name: Install Vim Plugins
+  shell: vim +PluginInstall +qall
+
+- name: Set non-natural mouse scroll
+  shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
+
+- name: Show all hidden files
+  shell: defaults write com.apple.finder AppleShowAllFiles TRUE

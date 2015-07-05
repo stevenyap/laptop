@@ -1,0 +1,16 @@
+---
+- name: Detect rvm installer
+  stat: path={{ home_directory }}/.rvm/bin/rvm
+  register: is_rvm_installed
+
+- name: Add no documentation for all gems installations
+  lineinfile: "create=yes dest={{ home_directory }}/.gemrc line=\"gem: --no-document\""
+  when: not is_rvm_installed.stat.exists
+
+- name: Install RVM with rails
+  shell: curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+  when: not is_rvm_installed.stat.exists
+
+- name: Source RVM
+  shell: . {{ home_directory }}/.bash_profile
+  when: not is_rvm_installed.stat.exists
