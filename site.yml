@@ -1,7 +1,9 @@
 - hosts: all
   roles:
     - homebrew
-    - config
     - rvm
+    - config
   vars:
+    machine_name: tao
     home_directory: /Users/stevenyap
+    tmp_download_folder: ./tmp/download

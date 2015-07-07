@@ -15,10 +15,16 @@ Here's the list of items that the script installs:
 - Configure the macbook using my dotfiles and various other nusiance setup such as removing natural scroll
 
 # TODOs
-- hide the dock
-- give accessibility permission to shiftit
 - install solarized to iterm2
-- setup iterm2 perferance automatically
 - install hubstaff as cask
 - set keyboard shortcut Cmd-e to show desktop
 - set Mission Control to mouse button 3
+
+# App Store to be installed manually
+- Witch
+- aText
+
+# Can't Do
+- hide the dock
+- give accessibility permission to shiftit
+- set Caps Lock as Ctrl

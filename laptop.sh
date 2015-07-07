@@ -2,16 +2,6 @@
 
 set -e
 
-# variables
-MACHINE_NAME=tao
-
-echo 'Basic Setup of Mac'
-
-if [[ hostname -ne MACHINE_NAME ]]; then
-	echo "Set machine name to $MACHINE_NAME"
-	sudo scutil --set HostName $MACHINE_NAME
-fi
-
 if [[ ! -x `xcode-select -p` ]]; then
 	echo 'Install Xcode command'
 	code-select --install
@@ -34,5 +24,5 @@ if [[ ! -e hosts ]]; then
 fi
 
 if [[ -x `which ansible` ]]; then
-	ansible-playbook -i hosts site.yml --ask-sudo-pass -vvvv
+	ansible-playbook -i hosts site.yml --ask-sudo-pass -v
 fi

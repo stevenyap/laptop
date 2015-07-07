@@ -1,4 +1,23 @@
 ---
+- name: Make Git remembers account login
+  shell: git config --global credential.helper osxkeychain
+
+- stat: path={{ home_directory }}/Library/Fonts/Inconsolata\ for\ Powerline.otf
+  register: font
+  changed_when: false
+
+- name: Download Inconsolata font and various other fonts
+  git: repo=https://github.com/powerline/fonts.git dest={{ tmp_download_folder }}
+  when: not font.stat.exists
+
+- name: Install Inconsolata font and various other fonts
+  shell: "{{ tmp_download_folder }}/install.sh"
+  when: not font.stat.exists
+
+- name: Remove downloaded fonts
+  file: path={{ tmp_download_folder }} state=absent
+  when: not font.stat.exists
+
 - name: Clone dotfiles
   git: repo=https://github.com/stevenyap/dotfiles.git dest={{ home_directory }}/.dotfiles force=no update=no
 
@@ -15,7 +34,21 @@
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
 
 - name: Install Vim Plugins
-  shell: vim +PluginInstall +qall
+  shell: vim +PluginInstall +qall > /dev/null 2>&1
+
+- name: Install Gems
+  shell: gem install {{ item }} --no-ri --no-rdoc
+  with_items:
+    - tmuxinator
+    - bundler
+
+- shell: hostname
+  register: hostname
+
+- name: Set machine name
+  shell: scutil --set HostName {{ machine_name }}
+  sudo: true
+  when: hostname.stdout != machine_name
 
 - name: Set non-natural mouse scroll
   shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
