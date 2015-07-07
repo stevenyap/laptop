@@ -21,11 +21,20 @@
 - name: Clone dotfiles
   git: repo=https://github.com/stevenyap/dotfiles.git dest={{ home_directory }}/.dotfiles force=no update=no
 
+- stat: path={{ home_directory }}/.gitignore_global
+  register: gitignore_global
+  changed_when: false
+
+- name: Remove .gitignore_global if it is not a symlink
+  file: path={{ home_directory }}/.gitignore_global state=absent
+  when: not gitignore_global.stat.islnk
+
 - name: Symlink dotfiles
   file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
   with_items:
     - vimrc
     - tmux.conf
+    - gitignore_global
 
 - name: source .dotfiles/.bash_profile in ~/.bash_profile
   lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile >> ~/.bash_profile"
