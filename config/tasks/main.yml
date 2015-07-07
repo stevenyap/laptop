@@ -44,6 +44,7 @@
 
 - shell: hostname
   register: hostname
+  changed_when: false
 
 - name: Set machine name
   shell: scutil --set HostName {{ machine_name }}
