@@ -28,3 +28,4 @@ Here's the list of items that the script installs:
 - hide the dock
 - give accessibility permission to shiftit
 - set Caps Lock as Ctrl
+- turn off guest account
