@@ -29,12 +29,13 @@
   file: path={{ home_directory }}/.gitignore_global state=absent
   when: not gitignore_global.stat.islnk
 
+- name: Remove system dotfiles
+  file: path={{ home_directory }}/.{{ item }} state=absent
+  with_items: symlink_dotfiles
+
 - name: Symlink dotfiles
   file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
-  with_items:
-    - vimrc
-    - tmux.conf
-    - gitignore_global
+  with_items: symlink_dotfiles
 
 - name: source .dotfiles/.bash_profile in ~/.bash_profile
   lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile >> ~/.bash_profile"
@@ -50,6 +51,9 @@
   with_items:
     - tmuxinator
     - bundler
+
+- name: Symlink Sublime text 3 bin
+  file: path=/usr/local/bin/subl src=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl state=link 
 
 - shell: hostname
   register: hostname

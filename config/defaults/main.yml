@@ -1,0 +1,6 @@
+---
+symlink_dotfiles:
+  - vimrc
+  - tmux.conf
+  - gitignore_global
+  - gitconfig
