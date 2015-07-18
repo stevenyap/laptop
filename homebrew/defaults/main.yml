@@ -34,5 +34,6 @@ homebrew_cask_apps:
   - vlc
   - evernote
   - openoffice
+  - utorrent
 
 homebrew_cask_appdir: /Applications
