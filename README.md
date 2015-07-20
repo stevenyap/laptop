@@ -19,6 +19,8 @@ Here's the list of items that the script installs:
 - install hubstaff as cask
 - set keyboard shortcut Cmd-e to show desktop
 - set Mission Control to mouse button 3
+- use Automator to setup preferences?
+- securely restore SSH key
 
 # App Store to be installed manually
 - Witch
