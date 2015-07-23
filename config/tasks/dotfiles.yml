@@ -2,17 +2,15 @@
 - name: Clone dotfiles
   git: repo=https://github.com/stevenyap/dotfiles.git dest={{ home_directory }}/.dotfiles force=no update=no
 
-- stat: path={{ home_directory }}/.gitignore_global
-  register: gitignore_global
+- stat: path={{ home_directory }}/.{{ item }}
+  with_items: symlink_dotfiles
+  register: dotfiles
   changed_when: false
-
-- name: Remove .gitignore_global if it is not a symlink
-  file: path={{ home_directory }}/.gitignore_global state=absent
-  when: not gitignore_global.stat.islnk
 
 - name: Remove system dotfiles
   file: path={{ home_directory }}/.{{ item }} state=absent
-  with_items: symlink_dotfiles
+  with_items: dotfiles.results
+  when: not item.stat.islnk
 
 - name: Symlink dotfiles
   file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
@@ -27,8 +25,11 @@
 - name: Install Vim Plugins
   shell: vim +PluginInstall +qall > /dev/null 2>&1
 
+- command: gem list
+  register: installed_gems
+  changed_when: false
+
 - name: Install Gems
   shell: gem install {{ item }} --no-ri --no-rdoc
-  with_items:
-    - tmuxinator
-    - bundler
+  with_items: gems
+  when: "'{{ item }}' not in installed_gems.stdout"
