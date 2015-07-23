@@ -1,4 +1,6 @@
 ---
+- include: osx.yml
+
 - name: Make Git remembers account login
   shell: git config --global credential.helper osxkeychain
 
@@ -38,7 +40,7 @@
   with_items: symlink_dotfiles
 
 - name: source .dotfiles/.bash_profile in ~/.bash_profile
-  lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile >> ~/.bash_profile"
+  lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile"
 
 - name: Clone Vim Vundle
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
@@ -54,18 +56,3 @@
 
 - name: Symlink Sublime text 3 bin
   file: path=/usr/local/bin/subl src=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl state=link 
-
-- shell: hostname
-  register: hostname
-  changed_when: false
-
-- name: Set machine name
-  shell: scutil --set HostName {{ machine_name }}
-  sudo: true
-  when: hostname.stdout != machine_name
-
-- name: Set non-natural mouse scroll
-  shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
-
-- name: Show all hidden files
-  shell: defaults write com.apple.finder AppleShowAllFiles TRUE

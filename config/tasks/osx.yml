@@ -1,0 +1,115 @@
+---
+# Scripts taken from https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+- shell: hostname
+  register: hostname
+  changed_when: false
+
+- name: Set machine name
+  shell: scutil --set HostName {{ machine_name }}
+  sudo: true
+  when: hostname.stdout != machine_name
+
+- name: Set non-natural mouse scroll
+  shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
+
+- name: Enable tap to click for this user and for the login screen
+  shell: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  shell: defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  shell: defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+- name: Auto hide the dock
+  shell: defaults write com.apple.dock autohide -bool true
+
+- name: Remove the auto-hiding Dock delay
+  shell: defaults write com.apple.dock autohide-delay -float 0
+
+- name: Remove the animation when hiding/showing the Dock
+  shell: defaults write com.apple.dock autohide-time-modifier -float 0
+
+- name: Wipe all (default) app icons from the Dock
+  shell: defaults write com.apple.dock persistent-apps -array
+ 
+- name: Set the icon size of Dock items to 2 pixels
+  shell: defaults write com.apple.dock tilesize -int 2
+
+- name: Disable the sound effects on boot
+  shell: 'nvram SystemAudioVolume=" "'
+  sudo: true
+
+- name: Expand save panel by default
+  shell: defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+  shell: defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+- name: Expand print panel by default
+  shell: defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+  shell: defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+- name: Save to disk (not to iCloud) by default
+  shell: defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+- name: Disable the "Are you sure you want to open this application?" dialog
+  shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+- name: Disable Notification Center and remove the menu bar icon
+  shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+- name: Disable smart quotes as they’re annoying when typing code
+  shell: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+- name: Disable smart dashes as they’re annoying when typing code
+  shell: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+- name: Set a blazingly fast keyboard repeat rate
+  shell: defaults write NSGlobalDomain KeyRepeat -int 1
+
+- name: Disable auto-correct
+  shell: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+- name: Require password immediately after sleep or screen saver begins
+  shell: defaults write com.apple.screensaver askForPassword -int 1
+  shell: defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+- name: Finder - show hidden files by default
+  shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+
+- name: Finder - show all filename extensions
+  shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+- name: Finder - show status bar
+  shell: defaults write com.apple.finder ShowStatusBar -bool true
+
+- name: Finder - show path bar
+  shell: defaults write com.apple.finder ShowPathbar -bool true
+
+- name: Finder - allow text selection in Quick Look
+  shell: defaults write com.apple.finder QLEnableTextSelection -bool true
+
+- name: Finder - Display full POSIX path as Finder window title
+  shell: defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+- name: Finder - Disable the warning when changing a file extension
+  shell: defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+- name: Finder - Avoid creating .DS_Store files on network volumes
+  shell: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+- name: Finder - Enable snap-to-grid for icons on the desktop and in other icon views
+  shell: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+  shell: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+  shell: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+- name: Finder - Use list view in all Finder windows by default
+  shell: defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+- name: Finder - Disable the warning before emptying the Trash
+  shell: defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+- name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
+  shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
+
+- name: Use plain text mode for new TextEdit documents
+  shell: defaults write com.apple.TextEdit RichText -int 0
+
+- name: Open and save files as UTF-8 in TextEdit
+  shell: defaults write com.apple.TextEdit PlainTextEncoding -int 4
+  shell: defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
