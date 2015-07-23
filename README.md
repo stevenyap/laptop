@@ -16,8 +16,12 @@ Here's the list of items that the script installs:
 - Install solarized to iterm2
 - Restore SSH key via symlinking to Dropbox
 
+# Dependencies
+- dotfiles and other configuration files such as iterm2 are stored in https://github.com/stevenyap/dotfiles
+- SSH key is stored in Dropbox and restored via Dropbox syncing
+- OSX defaults writing to preferences does not work for all OS versions
+
 # TODOs
-- Install hubstaff as cask
 - Set keyboard shortcut Cmd-e to show desktop
 - Set Mission Control to mouse button 3
 
