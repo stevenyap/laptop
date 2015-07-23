@@ -1,5 +1,5 @@
 ---
-- include: install_fonts.yml
+- include: install_themes.yml
 - include: dotfiles.yml
 - include: osx.yml
 

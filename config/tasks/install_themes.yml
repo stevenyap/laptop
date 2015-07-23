@@ -1,0 +1,23 @@
+---
+- name: Ensure tmp_download_folder is present
+  file: path={{ tmp_download_folder }} state=directory
+
+- stat: path={{ home_directory }}/Library/Fonts/Inconsolata\ for\ Powerline.otf
+  register: font
+  changed_when: false
+
+- name: Download Inconsolata font and various other fonts
+  git: repo=https://github.com/powerline/fonts.git dest={{ tmp_download_folder }}
+  when: not font.stat.exists
+
+- name: Install Inconsolata font and various other fonts
+  shell: "{{ tmp_download_folder }}/install.sh"
+  when: not font.stat.exists
+
+- name: Download iterm2.solarized light color scheme
+  get_url: dest={{ tmp_download_folder  }}/Solarized-Light.itermcolors url=https://raw.githubusercontent.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Light.itermcolors
+  register: downloaded_solarized
+
+- name: Install iterm2 solarized light color scheme
+  shell: "open {{ tmp_download_folder  }}/Solarized-Light.itermcolors"
+  when: downloaded_solarized.changed
