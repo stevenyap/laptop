@@ -29,14 +29,25 @@
 - name: Auto hide the dock
   osx_defaults: domain=com.apple.dock key=autohide type=bool value=true state=present
 
+- shell: defaults read com.apple.dock {{ item }}
+  with_items:
+    - autohide-delay
+    - autohide-time-modifier
+    - persistent-apps
+  register: com_apple_dock
+  changed_when: false
+
 - name: Remove the auto-hiding Dock delay
   shell: defaults write com.apple.dock autohide-delay -float 0
+  when: com_apple_dock.results[0].stdout != "0"
 
 - name: Remove the animation when hiding/showing the Dock
   shell: defaults write com.apple.dock autohide-time-modifier -float 0
+  when: com_apple_dock.results[1].stdout != "0"
 
 - name: Wipe all (default) app icons from the Dock
   shell: defaults write com.apple.dock persistent-apps -array
+  when: com_apple_dock.results[2].stdout != "(\n)"
  
 - name: Set the icon size of Dock items to 2 pixels
   osx_defaults: domain=com.apple.dock key=tilesize type=int value=2 state=present
@@ -63,8 +74,13 @@
 - name: Disable the "Are you sure you want to open this application?" dialog
   osx_defaults: domain=com.apple.LaunchServices key=LSQuarantine type=bool value=false state=present
 
+- shell: launchctl list
+  register: launchctl_list
+  changed_when: false
+
 - name: Disable Notification Center and remove the menu bar icon
   shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+  when: "'notificationcenterui' in launchctl_list.stdout"
 
 - name: Disable smart quotes as they’re annoying when typing code
   osx_defaults: domain=NSGlobalDomain key=NSAutomaticQuoteSubstitutionEnabled type=bool value=false
@@ -88,7 +104,7 @@
   osx_defaults: domain=com.apple.finder key=AppleShowAllFiles type=bool value=true state=present
 
 - name: Finder - show all filename extensions
-  shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  osx_defaults: domain=NSGlobalDomain key=AppleShowAllExtensions type=bool value=true
 
 - name: Finder - show status bar
   osx_defaults: domain=com.apple.finder key=ShowStatusBar type=bool value=true state=present
@@ -118,6 +134,10 @@
 
 - name: Finder - Disable the warning before emptying the Trash
   osx_defaults: domain=com.apple.finder key=WarnOnEmptyTrash type=bool value=false state=present
+
+- shell: defaults read com.apple.finder FXInfoPanesExpanded
+  register: fx_info_panes
+  changed_when: false
 
 - name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
   shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
