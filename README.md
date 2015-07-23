@@ -13,19 +13,19 @@ Here's the list of items that the script installs:
 - homebrew and cask
 - List of brewed package and cask apps can be found in `homebrew/defaults/main.yml`
 - Configure the macbook using my dotfiles and various other nusiance setup such as removing natural scroll, autohiding the dock
-- install solarized to iterm2
+- Install solarized to iterm2
+- Restore SSH key via symlinking to Dropbox
 
 # TODOs
-- install hubstaff as cask
-- set keyboard shortcut Cmd-e to show desktop
-- set Mission Control to mouse button 3
-- securely restore SSH key
+- Install hubstaff as cask
+- Set keyboard shortcut Cmd-e to show desktop
+- Set Mission Control to mouse button 3
 
 # App Store to be installed manually
 - Witch
 - aText
 
 # Can't Do
-- give accessibility permission to shiftit
-- set Caps Lock as Ctrl
-- turn off guest account
+- Give accessibility permission to shiftit
+- Set Caps Lock as Ctrl
+- Turn off guest account
