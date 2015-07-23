@@ -9,6 +9,9 @@
   sudo: true
   when: hostname.stdout != machine_name
 
+- name: Make Git remembers account login
+  shell: git config --global credential.helper osxkeychain
+
 - name: Set non-natural mouse scroll
   shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
 

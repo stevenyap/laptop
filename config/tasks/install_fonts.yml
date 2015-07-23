@@ -1,0 +1,16 @@
+---
+- stat: path={{ home_directory }}/Library/Fonts/Inconsolata\ for\ Powerline.otf
+  register: font
+  changed_when: false
+
+- name: Download Inconsolata font and various other fonts
+  git: repo=https://github.com/powerline/fonts.git dest={{ tmp_download_folder }}
+  when: not font.stat.exists
+
+- name: Install Inconsolata font and various other fonts
+  shell: "{{ tmp_download_folder }}/install.sh"
+  when: not font.stat.exists
+
+- name: Remove downloaded fonts
+  file: path={{ tmp_download_folder }} state=absent
+  when: not font.stat.exists
