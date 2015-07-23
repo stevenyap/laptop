@@ -12,14 +12,13 @@ Here's the list of items that the script installs:
 - pip and ansible first in laptop.sh
 - homebrew and cask
 - List of brewed package and cask apps can be found in `homebrew/defaults/main.yml`
-- Configure the macbook using my dotfiles and various other nusiance setup such as removing natural scroll
+- Configure the macbook using my dotfiles and various other nusiance setup such as removing natural scroll, autohiding the dock
+- install solarized to iterm2
 
 # TODOs
-- install solarized to iterm2
 - install hubstaff as cask
 - set keyboard shortcut Cmd-e to show desktop
 - set Mission Control to mouse button 3
-- use Automator to setup preferences?
 - securely restore SSH key
 
 # App Store to be installed manually
@@ -27,7 +26,6 @@ Here's the list of items that the script installs:
 - aText
 
 # Can't Do
-- hide the dock
 - give accessibility permission to shiftit
 - set Caps Lock as Ctrl
 - turn off guest account
