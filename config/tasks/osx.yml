@@ -13,15 +13,17 @@
   shell: git config --global credential.helper osxkeychain
 
 - name: Set non-natural mouse scroll
-  shell: defaults write -g com.apple.swipescrolldirection -bool FALSE
+  shell: defaults write NSGlobalDomain com.apple.swipescrolldirection -bool FALSE
 
-- name: Enable tap to click for this user and for the login screen
-  shell: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+- name: Enable tap to click for this user and for the login screen (1/2)
+  osx_defaults: domain=com.apple.driver.AppleBluetoothMultitouch.trackpad key=Clicking type=bool value=true state=present
+
+- name: Enable tap to click for this user and for the login screen (2/2)
   shell: defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
   shell: defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 - name: Auto hide the dock
-  shell: defaults write com.apple.dock autohide -bool true
+  osx_defaults: domain=com.apple.dock key=autohide type=bool value=true state=present
 
 - name: Remove the auto-hiding Dock delay
   shell: defaults write com.apple.dock autohide-delay -float 0
@@ -33,7 +35,7 @@
   shell: defaults write com.apple.dock persistent-apps -array
  
 - name: Set the icon size of Dock items to 2 pixels
-  shell: defaults write com.apple.dock tilesize -int 2
+  osx_defaults: domain=com.apple.dock key=tilesize type=int value=2 state=present
 
 - name: Disable the sound effects on boot
   shell: 'nvram SystemAudioVolume=" "'
@@ -51,7 +53,7 @@
   shell: defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 - name: Disable the "Are you sure you want to open this application?" dialog
-  shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
+  osx_defaults: domain=com.apple.LaunchServices key=LSQuarantine type=bool value=false state=present
 
 - name: Disable Notification Center and remove the menu bar icon
   shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
@@ -68,33 +70,35 @@
 - name: Disable auto-correct
   shell: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-- name: Require password immediately after sleep or screen saver begins
-  shell: defaults write com.apple.screensaver askForPassword -int 1
-  shell: defaults write com.apple.screensaver askForPasswordDelay -int 0
+- name: Ask for password after sleep or screen saver begins
+  osx_defaults: domain=com.apple.screensaver key=askForPassword type=int value=1 state=present
+
+- name: Ask for password delay to be 0 after sleep or screen saver begins
+  osx_defaults: domain=com.apple.screensaver key=askForPasswordDelay type=int value=0 state=present
 
 - name: Finder - show hidden files by default
-  shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+  osx_defaults: domain=com.apple.finder key=AppleShowAllFiles type=bool value=true state=present
 
 - name: Finder - show all filename extensions
   shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 - name: Finder - show status bar
-  shell: defaults write com.apple.finder ShowStatusBar -bool true
+  osx_defaults: domain=com.apple.finder key=ShowStatusBar type=bool value=true state=present
 
 - name: Finder - show path bar
-  shell: defaults write com.apple.finder ShowPathbar -bool true
+  osx_defaults: domain=com.apple.finder key=ShowPathbar type=bool value=true state=present
 
 - name: Finder - allow text selection in Quick Look
-  shell: defaults write com.apple.finder QLEnableTextSelection -bool true
+  osx_defaults: domain=com.apple.finder key=QLEnableTextSelection type=bool value=true state=present
 
 - name: Finder - Display full POSIX path as Finder window title
-  shell: defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+  osx_defaults: domain=com.apple.finder key=_FXShowPosixPathInTitle type=bool value=true state=present
 
 - name: Finder - Disable the warning when changing a file extension
-  shell: defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  osx_defaults: domain=com.apple.finder key=FXEnableExtensionChangeWarning type=bool value=false state=present
 
 - name: Finder - Avoid creating .DS_Store files on network volumes
-  shell: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  osx_defaults: domain=com.apple.desktopservices key=DSDontWriteNetworkStores type=bool value=true state=present
 
 - name: Finder - Enable snap-to-grid for icons on the desktop and in other icon views
   shell: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
@@ -102,17 +106,19 @@
   shell: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 - name: Finder - Use list view in all Finder windows by default
-  shell: defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+  osx_defaults: domain=com.apple.finder key=FXPreferredViewStyle type=string value="Nlsv" state=present
 
 - name: Finder - Disable the warning before emptying the Trash
-  shell: defaults write com.apple.finder WarnOnEmptyTrash -bool false
+  osx_defaults: domain=com.apple.finder key=WarnOnEmptyTrash type=bool value=false state=present
 
 - name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
   shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
 - name: Use plain text mode for new TextEdit documents
-  shell: defaults write com.apple.TextEdit RichText -int 0
+  osx_defaults: domain=com.apple.TextEdit key=RichText type=int value=0 state=present
 
-- name: Open and save files as UTF-8 in TextEdit
-  shell: defaults write com.apple.TextEdit PlainTextEncoding -int 4
-  shell: defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+- name: Open files as UTF-8 in TextEdit
+  osx_defaults: domain=com.apple.TextEdit key=PlainTextEncoding type=int value=4 state=present
+
+- name: Save files as UTF-8 in TextEdit
+  osx_defaults: domain=com.apple.TextEdit key=PlainTextEncodingForWrite type=int value=4 state=present
