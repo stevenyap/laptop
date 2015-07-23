@@ -20,10 +20,15 @@
   lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile"
 
 - name: Clone Vim Vundle
-  git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim update=no
+
+- stat: path={{ home_directory }}/.vim/bundle/vim-rails
+  register: vim_plugins_installed
+  changed_when: false
 
 - name: Install Vim Plugins
   shell: vim +PluginInstall +qall > /dev/null 2>&1
+  when: not vim_plugins_installed.stat.exists
 
 - command: gem list
   register: installed_gems
