@@ -1,7 +1,6 @@
 ---
 - include: install_themes.yml
 - include: dotfiles.yml
-- include: osx.yml
 
 - name: Symlink Sublime text 3 bin
   file: path=/usr/local/bin/subl src=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl state=link 

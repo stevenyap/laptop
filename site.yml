@@ -3,6 +3,7 @@
     - homebrew
     - rvm
     - config
+    - osx
   vars:
     machine_name: tao
     home_directory: /Users/stevenyap
