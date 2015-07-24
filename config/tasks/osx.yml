@@ -135,10 +135,6 @@
 - name: Finder - Disable the warning before emptying the Trash
   osx_defaults: domain=com.apple.finder key=WarnOnEmptyTrash type=bool value=false state=present
 
-- shell: defaults read com.apple.finder FXInfoPanesExpanded
-  register: fx_info_panes
-  changed_when: false
-
 - name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
   shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
