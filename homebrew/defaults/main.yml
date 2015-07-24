@@ -11,6 +11,7 @@ homebrew_installed_packages:
   - reattach-to-user-namespace
   - ctags
   - heroku-toolbelt
+  - npm
 
 homebrew_start_services_at_login:
   - postgresql
