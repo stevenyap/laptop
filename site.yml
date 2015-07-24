@@ -4,6 +4,7 @@
     - rvm
     - themes
     - config
+    - dotfiles
     - osx
   vars:
     machine_name: tao
