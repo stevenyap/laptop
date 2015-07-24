@@ -1,5 +1,4 @@
 ---
-- include: install_themes.yml
 - include: dotfiles.yml
 
 - name: Symlink Sublime text 3 bin
