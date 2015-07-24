@@ -6,6 +6,7 @@
     - config
     - dotfiles
     - osx
+    - ssh
   vars:
     machine_name: tao
     home_directory: /Users/stevenyap
