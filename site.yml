@@ -3,10 +3,10 @@
     - homebrew
     - rvm
     - themes
-    - config
     - dotfiles
     - osx
     - ssh
+    - misc
   vars:
     machine_name: tao
     home_directory: /Users/stevenyap
