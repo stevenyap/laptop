@@ -1,0 +1,4 @@
+---
+- name: Install Grip for local Github markdown previewing
+  pip: name=grip
+  sudo: true

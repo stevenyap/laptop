@@ -1,6 +1,7 @@
 - hosts: all
   roles:
     - homebrew
+    - pip
     - rvm
     - themes
     - dotfiles
