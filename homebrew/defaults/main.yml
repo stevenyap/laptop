@@ -36,5 +36,6 @@ homebrew_cask_apps:
   - evernote
   - openoffice
   - utorrent
+  - skype
 
 homebrew_cask_appdir: /Applications
