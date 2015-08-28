@@ -102,6 +102,9 @@
 - name: Finder - show hidden files by default
   osx_defaults: domain=com.apple.finder key=AppleShowAllFiles type=bool value=true state=present
 
+- name: Finder - show Desktop folder by default
+  osx_defaults: domain=com.apple.finder key=NewWindowTarget type=string value="PfDe"  state=present
+
 - name: Finder - show all filename extensions
   osx_defaults: domain=NSGlobalDomain key=AppleShowAllExtensions type=bool value=true
 
