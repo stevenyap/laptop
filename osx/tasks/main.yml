@@ -140,11 +140,14 @@
 - name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
   shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
-- name: Use plain text mode for new TextEdit documents
+- name: TextEdit - Use plain text mode for new documents
   osx_defaults: domain=com.apple.TextEdit key=RichText type=int value=0 state=present
 
-- name: Open files as UTF-8 in TextEdit
+- name: TextEdit - Open files as UTF-8
   osx_defaults: domain=com.apple.TextEdit key=PlainTextEncoding type=int value=4 state=present
 
-- name: Save files as UTF-8 in TextEdit
+- name: TextEdit - Save files as UTF-8
   osx_defaults: domain=com.apple.TextEdit key=PlainTextEncodingForWrite type=int value=4 state=present
+
+- name: TextEdit - Open an empty document by default
+  osx_defaults: domain=NSGlobalDomain key=NSShowAppCentricOpenPanelInsteadOfUntitledFile type=bool value=false
