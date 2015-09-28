@@ -8,3 +8,6 @@ symlink_dotfiles:
 gems:
   - tmuxinator
   - bundler
+
+apps:
+  - Lock-Screen.app
