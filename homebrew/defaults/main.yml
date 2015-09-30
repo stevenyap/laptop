@@ -37,6 +37,7 @@ homebrew_cask_apps:
   - openoffice
   - utorrent
   - skype
+  - gimp
   - asepsis # Removes .DS_STORE
 
 homebrew_cask_appdir: /Applications
