@@ -4,7 +4,7 @@ homebrew_install_path: /usr/local/homebrew
 homebrew_installed_packages:
   - git
   - vim
-  - ack
+  - the_silver_searcher
   - tmux
   - postgresql
   - brew-cask
