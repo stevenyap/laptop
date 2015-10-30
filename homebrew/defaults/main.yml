@@ -39,5 +39,6 @@ homebrew_cask_apps:
   - skype
   - gimp
   - asepsis # Removes .DS_STORE
+  - lastfm # Music recommendation
 
 homebrew_cask_appdir: /Applications
