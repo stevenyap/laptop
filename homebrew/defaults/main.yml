@@ -2,16 +2,17 @@
 homebrew_install_path: /usr/local/homebrew
 
 homebrew_installed_packages:
+  - brew-cask
   - git
   - vim
   - the_silver_searcher
   - tmux
   - postgresql
-  - brew-cask
   - reattach-to-user-namespace
   - ctags
   - heroku-toolbelt
   - npm
+  - imagemagick
 
 homebrew_start_services_at_login:
   - postgresql
