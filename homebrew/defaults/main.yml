@@ -13,6 +13,7 @@ homebrew_installed_packages:
   - heroku-toolbelt
   - npm
   - imagemagick
+  - phantomjs
 
 homebrew_start_services_at_login:
   - postgresql
