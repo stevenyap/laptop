@@ -42,5 +42,6 @@ homebrew_cask_apps:
   - gimp
   - asepsis # Removes .DS_STORE
   - lastfm # Music recommendation
+  - obs # obsproject streams and record your screen as video
 
 homebrew_cask_appdir: /Applications
