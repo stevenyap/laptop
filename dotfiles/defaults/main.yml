@@ -4,6 +4,7 @@ symlink_dotfiles:
   - tmux.conf
   - gitignore_global
   - gitconfig
+  - agignore
 
 gems:
   - tmuxinator
