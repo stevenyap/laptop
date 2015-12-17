@@ -10,7 +10,7 @@
 - name: Remove system dotfiles
   file: path={{ home_directory }}/.{{ item }} state=absent
   with_items: dotfiles.results
-  when: not item.stat.islnk
+  when: item.stat.islnk is defined and item.stat.islnk == False
 
 - name: Symlink dotfiles
   file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
