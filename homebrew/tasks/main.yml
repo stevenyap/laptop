@@ -79,6 +79,6 @@
   when: "'{{ item }}' not in homebrew_cask_list.stdout"
 
 - name: Clean up downloaded installers
-  command: brew-cask cleanup
+  command: brew cask cleanup
   always_run: yes
   changed_when: false

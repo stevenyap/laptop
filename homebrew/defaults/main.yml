@@ -2,7 +2,6 @@
 homebrew_install_path: /usr/local/homebrew
 
 homebrew_installed_packages:
-  - brew-cask
   - git
   - vim
   - the_silver_searcher
