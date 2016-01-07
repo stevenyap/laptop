@@ -44,5 +44,6 @@ homebrew_cask_apps:
   - lastfm # Music recommendation
   - obs # obsproject streams and record your screen as video
   - arduino
+  - google-drive
 
 homebrew_cask_appdir: /Applications
