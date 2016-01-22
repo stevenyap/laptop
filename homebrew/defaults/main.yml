@@ -13,6 +13,7 @@ homebrew_installed_packages:
   - npm
   - imagemagick
   - phantomjs
+  - tree
   - picocom # Serial port reading for Arduino
 
 homebrew_start_services_at_login:
