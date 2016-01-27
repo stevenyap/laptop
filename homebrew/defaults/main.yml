@@ -32,7 +32,6 @@ homebrew_cask_apps:
   - shiftit
   - iterm2
   - appcleaner
-  - atext
   - sourcetree
   - sublime-text3
   - subtitles

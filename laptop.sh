@@ -11,7 +11,14 @@ if [ ! -x `xcode-select -p` ]; then
 	xcode-select --install
 fi
 
-source ~/ansible/hacking/env-setup
+if ! command_exists pip ; then
+	sudo easy_install pip
+	sudo pip install paramiko PyYAML Jinja2 httplib2 six
+fi
+
+if [ -e ~/ansible/hacking/env-setup ]; then
+	source ~/ansible/hacking/env-setup
+fi
 
 if ! command_exists ansible ; then
   echo 'Installing ansible...'
