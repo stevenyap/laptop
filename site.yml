@@ -1,7 +1,6 @@
 - hosts: all
   roles:
     - homebrew
-    - pip
     - rvm
     - themes
     - dotfiles
@@ -10,5 +9,6 @@
     - misc
   vars:
     machine_name: tao
+    user: stevenyap
     home_directory: /Users/stevenyap
     tmp_download_folder: ./tmp/download

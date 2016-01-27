@@ -5,16 +5,13 @@
 
 - name: Set machine name
   shell: scutil --set HostName {{ machine_name }}
-  sudo: true
+  become: True
   when: hostname.stdout != machine_name
-
-- shell: git config --global credential.helper
-  register: git_credential_helper
-  changed_when: false
 
 - name: Make Git remembers account login
   shell: git config --global credential.helper osxkeychain
-  when: git_credential_helper.stdout != 'osxkeychain'
+  changed_when: false
+  become: True
 
 - name: Set non-natural mouse scroll
   osx_defaults: domain=NSGlobalDomain key=com.apple.swipescrolldirection type=bool value=false
@@ -28,32 +25,21 @@
 - name: Auto hide the dock
   osx_defaults: domain=com.apple.dock key=autohide type=bool value=true state=present
 
-- shell: defaults read com.apple.dock {{ item }}
-  with_items:
-    - autohide-delay
-    - autohide-time-modifier
-    - persistent-apps
-  register: com_apple_dock
-  changed_when: false
-
 - name: Remove the auto-hiding Dock delay
   shell: defaults write com.apple.dock autohide-delay -float 0
-  when: com_apple_dock.results[0].stdout != "0"
 
 - name: Remove the animation when hiding/showing the Dock
   shell: defaults write com.apple.dock autohide-time-modifier -float 0
-  when: com_apple_dock.results[1].stdout != "0"
 
 - name: Wipe all (default) app icons from the Dock
   shell: defaults write com.apple.dock persistent-apps -array
-  when: com_apple_dock.results[2].stdout != "(\n)"
- 
+
 - name: Set the icon size of Dock items to 2 pixels
   osx_defaults: domain=com.apple.dock key=tilesize type=int value=2 state=present
 
 - name: Disable the sound effects on boot
   shell: 'nvram SystemAudioVolume=" "'
-  sudo: true
+  become: True
 
 - name: Expand save panel by default (1/2)
   osx_defaults: domain=NSGlobalDomain key=NSNavPanelExpandedStateForSaveMode type=bool value=true
@@ -98,6 +84,7 @@
 
 - name: Ask for password delay to be 15 mins after sleep or screen saver begins
   osx_defaults: domain=com.apple.screensaver key=askForPasswordDelay type=int value=900 state=present
+  become: True
 
 - name: Finder - show hidden files by default
   osx_defaults: domain=com.apple.finder key=AppleShowAllFiles type=bool value=true state=present
@@ -125,11 +112,6 @@
 
 - name: Finder - Avoid creating .DS_Store files on network volumes
   osx_defaults: domain=com.apple.desktopservices key=DSDontWriteNetworkStores type=bool value=true state=present
-
-- name: Finder - Enable snap-to-grid for icons on the desktop and in other icon views
-  shell: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-  shell: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-  shell: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 - name: Finder - Use list view in all Finder windows by default
   osx_defaults: domain=com.apple.finder key=FXPreferredViewStyle type=string value="Nlsv" state=present

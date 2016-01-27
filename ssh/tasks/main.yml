@@ -5,8 +5,7 @@
 
 - name: Remove ssh folder if it is a directory
   file: path={{ home_directory }}/.ssh state=absent
-  when: not ssh_directory.stat.islnk
+  when: ssh_directory.stat.islnk is defined and ssh_directory.stat.islnk == False
 
 - name: Symlink ssh folder to Dropbox
   file: path={{ home_directory }}/.ssh src={{ home_directory }}/Dropbox/.ssh state=link
-  when: not ssh_directory.stat.islnk

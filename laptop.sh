@@ -2,27 +2,29 @@
 
 set -e
 
-if [[ ! -x `xcode-select -p` ]]; then
-	echo 'Install Xcode command'
-	code-select --install
+command_exists () {
+  type "$1" &> /dev/null
+}
+
+if [ ! -x `xcode-select -p` ]; then
+	echo 'Installing Xcode command...'
+	xcode-select --install
 fi
 
-if [[ ! -x `which pip` ]]; then
-	echo 'Install pip'
-	sudo easy_install pip
-fi
+source ~/ansible/hacking/env-setup
 
-if [[ -x `which pip` && ! -x `which ansible` ]]; then
-	echo 'Install Ansible using pip'
-	sudo CFLAGS=-Qunused-arguments CPPFLAGS=-Qunused-arguments pip install ansible
+if ! command_exists ansible ; then
+  echo 'Installing ansible...'
+  git clone git://github.com/ansible/ansible.git --recursive ~/ansible
+  source ~/ansible/hacking/env-setup
 fi
 
 echo 'Running Ansible to configure Dev machine'
 
-if [[ ! -e hosts ]]; then
+if [ ! -e hosts ]; then
 	echo localhost ansible_connection=local >> hosts
 fi
 
-if [[ -x `which ansible` ]]; then
-	ansible-playbook -i hosts site.yml --ask-sudo-pass -v
+if command_exists ansible ; then
+	ansible-playbook -i hosts site.yml --ask-become-pass -v
 fi

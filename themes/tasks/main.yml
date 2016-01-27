@@ -2,7 +2,7 @@
 - name: Ensure tmp_download_folder is present
   file: path={{ tmp_download_folder }} state=directory
 
-- stat: path={{ home_directory }}/Library/Fonts/Inconsolata\ for\ Powerline.otf
+- stat: path="{{ home_directory }}/Library/Fonts/Inconsolata for Powerline.otf"
   register: font
   changed_when: false
 

@@ -28,6 +28,7 @@ homebrew_taps:
 homebrew_cask_apps:
   - firefox
   - google-chrome
+  - google-drive
   - shiftit
   - iterm2
   - appcleaner
@@ -40,10 +41,9 @@ homebrew_cask_apps:
   - utorrent
   - skype
   - gimp
-  - asepsis # Removes .DS_STORE
   - lastfm # Music recommendation
   - obs # obsproject streams and record your screen as video
+  - java
   - arduino
-  - google-drive
 
 homebrew_cask_appdir: /Applications
