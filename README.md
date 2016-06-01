@@ -5,6 +5,7 @@ The objective of the script is to be able to setup a new Macbook automatically.
 ## Usage
 - Clone the project
 - `cd` into the cloned directory
+- Edit your machine setup variables in `site.yml`
 - Run `./laptop.sh`
 
 ## Installed Items
