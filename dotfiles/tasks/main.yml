@@ -3,18 +3,18 @@
   git: repo=https://github.com/stevenyap/dotfiles.git dest={{ home_directory }}/.dotfiles force=no update=no
 
 - stat: path={{ home_directory }}/.{{ item }}
-  with_items: symlink_dotfiles
+  with_items: "{{ symlink_dotfiles }}"
   register: dotfiles
   changed_when: false
 
 - name: Remove system dotfiles
   file: path={{ home_directory }}/.{{ item }} state=absent
-  with_items: dotfiles.results
+  with_items: "{{ dotfiles.results }}"
   when: item.stat.islnk is defined and item.stat.islnk == False
 
 - name: Symlink dotfiles
   file: path={{ home_directory }}/.{{ item }} src={{ home_directory }}/.dotfiles/.{{ item }} state=link 
-  with_items: symlink_dotfiles
+  with_items: "{{ symlink_dotfiles }}"
 
 - name: source .dotfiles/.bash_profile in ~/.bash_profile
   lineinfile: create=yes dest={{ home_directory }}/.bash_profile line="source ~/.dotfiles/.bash_profile"
@@ -36,9 +36,9 @@
 
 - name: Install Gems
   shell: gem install {{ item }} --no-ri --no-rdoc
-  with_items: gems
+  with_items: "{{ gems }}"
   when: "'{{ item }}' not in installed_gems.stdout"
 
 - name: Symlink custom apps in /Applications folder
   file: path=/Applications/{{ item }} src={{ home_directory }}/.dotfiles/Applications/{{ item }} state=link 
-  with_items: apps
+  with_items: "{{ apps }}"

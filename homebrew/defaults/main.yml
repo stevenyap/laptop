@@ -9,7 +9,7 @@ homebrew_installed_packages:
   - postgresql
   - reattach-to-user-namespace
   - ctags
-  - heroku-toolbelt
+  # - heroku-toolbelt
   - npm
   - imagemagick
   - phantomjs
