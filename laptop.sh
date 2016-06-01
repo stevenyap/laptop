@@ -13,7 +13,7 @@ fi
 
 if ! command_exists pip ; then
 	sudo easy_install pip
-	sudo pip install paramiko PyYAML Jinja2 httplib2 six
+	sudo pip install --user paramiko PyYAML Jinja2 httplib2 six
 fi
 
 if [ -e ~/ansible/hacking/env-setup ]; then
