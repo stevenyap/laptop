@@ -13,6 +13,7 @@ homebrew_installed_packages:
   - npm
   - imagemagick
   - phantomjs
+  - qt5     # for capybara-webkit: brew link --force qt5
   - tree
   - picocom # Serial port reading for Arduino
 
