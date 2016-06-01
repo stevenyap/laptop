@@ -13,17 +13,12 @@ fi
 
 if ! command_exists pip ; then
 	sudo easy_install pip
-	sudo pip install --user paramiko PyYAML Jinja2 httplib2 six
-fi
-
-if [ -e ~/ansible/hacking/env-setup ]; then
-	source ~/ansible/hacking/env-setup
 fi
 
 if ! command_exists ansible ; then
   echo 'Installing ansible...'
-  git clone git://github.com/ansible/ansible.git --recursive ~/ansible
-  source ~/ansible/hacking/env-setup
+  sudo pip install markupsafe # missing dependencies by ansible
+  sudo pip install ansible
 fi
 
 echo 'Running Ansible to configure Dev machine'
