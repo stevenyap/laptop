@@ -46,5 +46,6 @@ homebrew_cask_apps:
   - obs # obsproject streams and record your screen as video
   - java
   - arduino
+  - teamviewer
 
 homebrew_cask_appdir: /Applications
