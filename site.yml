@@ -2,6 +2,7 @@
   roles:
     - homebrew
     - rvm
+    - npm
     - themes
     - dotfiles
     - osx

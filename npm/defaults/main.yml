@@ -1,0 +1,21 @@
+---
+packages:
+  - caniuse-cmd
+  - babel-eslint
+  - eslint
+  - eslint-config-standard
+  - eslint-plugin-import
+  - eslint-plugin-react-native
+  - eslint-plugin-standard
+  - eslint_d
+  - jsonlint
+  - standard
+  - exp
+  - firebase-tools
+  - jest
+  - mocha
+  - react
+  - react-native-cli
+  - rnpm
+  - webpack
+  - webpack-dev-server
