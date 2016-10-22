@@ -7,9 +7,9 @@ homebrew_installed_packages:
   - the_silver_searcher
   - tmux
   - postgresql
-  - reattach-to-user-namespace
   - ctags
   # - heroku-toolbelt
+  - node
   - npm
   - imagemagick
   - phantomjs
@@ -42,7 +42,6 @@ homebrew_cask_apps:
   - utorrent
   - skype
   - gimp
-  - lastfm # Music recommendation
   - obs # obsproject streams and record your screen as video
   - java
   - arduino
