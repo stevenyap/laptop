@@ -26,22 +26,25 @@ homebrew_taps:
   - caskroom/versions
 
 homebrew_cask_apps:
+  - shiftit
+  - iterm2
+  - sourcetree
+  - sublime-text3
+  - appcleaner
   - firefox
   - google-chrome
   - google-drive
-  - shiftit
-  - iterm2
-  - appcleaner
-  - sourcetree
-  - sublime-text3
-  - subtitles
   - dropbox
-  - vlc
   - evernote
-  - utorrent
+  - vlc
+  - java
+  - genymotion
+  - android-studio
+  - virtualbox
+  - teamviewer
   - skype
   - obs # obsproject streams and record your screen as video
-  - java
-  - teamviewer
+  - subtitles
+  - utorrent
 
 homebrew_cask_appdir: /Applications
