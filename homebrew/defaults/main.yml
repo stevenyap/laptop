@@ -29,7 +29,7 @@ homebrew_cask_apps:
   - shiftit
   - iterm2
   - sourcetree
-  - sublime-text3
+  - sublime-text
   - appcleaner
   - firefox
   - google-chrome
