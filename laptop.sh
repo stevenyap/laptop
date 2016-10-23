@@ -7,12 +7,12 @@ command_exists () {
 }
 
 if [ ! -x `xcode-select -p` ]; then
-	echo 'Installing Xcode command...'
-	xcode-select --install
+  echo 'Installing Xcode command...'
+  xcode-select --install
 fi
 
 if ! command_exists pip ; then
-	sudo easy_install pip
+  sudo easy_install pip
 fi
 
 if ! command_exists ansible ; then
@@ -24,9 +24,9 @@ fi
 echo 'Running Ansible to configure Dev machine'
 
 if [ ! -e hosts ]; then
-	echo localhost ansible_connection=local >> hosts
+  echo localhost ansible_connection=local >> hosts
 fi
 
 if command_exists ansible ; then
-	ansible-playbook -i hosts site.yml --ask-become-pass -v
+  ansible-playbook -i hosts site.yml --ask-become-pass -v
 fi
