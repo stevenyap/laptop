@@ -1,4 +1,4 @@
---- # Scripts taken from https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+---
 - shell: hostname
   register: hostname
   changed_when: false
@@ -26,17 +26,13 @@
   osx_defaults: domain=com.apple.dock key=autohide type=bool value=true state=present
 
 - name: Remove the auto-hiding Dock delay
-  shell: defaults write com.apple.dock autohide-delay -float 0
+  osx_defaults: domain=com.apple.dock key=autohide-delay type=float value=0
 
 - name: Remove the animation when hiding/showing the Dock
-  shell: defaults write com.apple.dock autohide-time-modifier -float 0
+  osx_defaults: domain=com.apple.dock key=autohide-time-modifier type=float value=0
 
 - name: Wipe all (default) app icons from the Dock
-  shell: defaults write com.apple.dock persistent-apps -array
-
-- name: Disable the sound effects on boot
-  shell: 'nvram SystemAudioVolume=" "'
-  become: True
+  osx_defaults: domain=com.apple.dock key=persistent-apps state=absent
 
 - name: Expand save panel by default (1/2)
   osx_defaults: domain=NSGlobalDomain key=NSNavPanelExpandedStateForSaveMode type=bool value=true
@@ -115,9 +111,6 @@
 
 - name: Finder - Disable the warning before emptying the Trash
   osx_defaults: domain=com.apple.finder key=WarnOnEmptyTrash type=bool value=false state=present
-
-- name: Finder - Expand the following File Info panes - "General", "Open with", and "Sharing & Permissions"
-  shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
 - name: TextEdit - Use plain text mode for new documents
   osx_defaults: domain=com.apple.TextEdit key=RichText type=int value=0 state=present
