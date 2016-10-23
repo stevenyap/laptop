@@ -8,14 +8,13 @@ homebrew_installed_packages:
   - tmux
   - postgresql
   - ctags
-  # - heroku-toolbelt
+  - heroku
   - node
   - npm
   - imagemagick
   - phantomjs
   - qt5     # for capybara-webkit: brew link --force qt5
   - tree
-  - picocom # Serial port reading for Arduino
 
 homebrew_start_services_at_login:
   - postgresql
@@ -41,10 +40,8 @@ homebrew_cask_apps:
   - evernote
   - utorrent
   - skype
-  - gimp
   - obs # obsproject streams and record your screen as video
   - java
-  - arduino
   - teamviewer
 
 homebrew_cask_appdir: /Applications
