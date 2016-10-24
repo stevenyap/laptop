@@ -123,3 +123,6 @@
 
 - name: TextEdit - Open an empty document by default
   osx_defaults: domain=NSGlobalDomain key=NSShowAppCentricOpenPanelInsteadOfUntitledFile type=bool value=false
+
+- name: MenuBar - Set clock display to show date
+  osx_defaults: domain=com.apple.menuextra.clock key=DateFormat type=string value='EEE d MMM  h:mm a'
