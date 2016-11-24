@@ -6,7 +6,7 @@
     - themes
     - dotfiles
     - osx
-    - ssh
+    - secrets
     - misc
   vars:
     machine_name: tao
