@@ -47,5 +47,6 @@ homebrew_cask_apps:
   - obs # obsproject streams and record your screen as video
   - subtitles
   - utorrent
+  - the-unarchiver
 
 homebrew_cask_appdir: /Applications
