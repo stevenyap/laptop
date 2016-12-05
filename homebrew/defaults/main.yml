@@ -7,6 +7,7 @@ homebrew_installed_packages:
   - the_silver_searcher
   - tmux
   - postgresql
+  - mysql
   - reattach-to-user-namespace
   - ctags
   - heroku
@@ -16,9 +17,11 @@ homebrew_installed_packages:
   - phantomjs
   - qt5     # for capybara-webkit: brew link --force qt5
   - tree
+  - homebrew/php/wp-cli
 
 homebrew_start_services_at_login:
   - postgresql
+  - mysql
 
 homebrew_upgrade_all_packages: no
 
