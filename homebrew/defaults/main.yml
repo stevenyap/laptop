@@ -51,5 +51,6 @@ homebrew_cask_apps:
   - subtitles
   - utorrent
   - the-unarchiver
+  - sequel-pro # MySQL client
 
 homebrew_cask_appdir: /Applications
