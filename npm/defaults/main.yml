@@ -19,3 +19,5 @@ packages:
   - rnpm
   - webpack
   - webpack-dev-server
+  - flow-bin
+  - git://github.com/ramitos/jsctags.git
