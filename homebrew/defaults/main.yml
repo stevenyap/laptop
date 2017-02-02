@@ -19,6 +19,7 @@ homebrew_installed_packages:
   - qt5     # for capybara-webkit: brew link --force qt5
   - tree
   - homebrew/php/wp-cli
+  - python3
 
 homebrew_start_services_at_login:
   - postgresql
