@@ -54,5 +54,6 @@ homebrew_cask_apps:
   - utorrent
   - the-unarchiver
   - sequel-pro # MySQL client
+  - fastlane # mobile app deployment
 
 homebrew_cask_appdir: /Applications

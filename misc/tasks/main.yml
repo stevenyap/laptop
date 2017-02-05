@@ -1,3 +1,6 @@
 ---
 - name: Symlink Sublime text 3 bin
   file: path=/usr/local/bin/subl src="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl" state=link force=yes
+
+- debug:
+    msg: "*** If you are installing a new laptop, remember to log out for all settings to take effect! ***"
