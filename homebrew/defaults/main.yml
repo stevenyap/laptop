@@ -20,6 +20,7 @@ homebrew_installed_packages:
   - tree
   - homebrew/php/wp-cli
   - python3
+  - neovim/neovim/neovim
 
 homebrew_start_services_at_login:
   - postgresql

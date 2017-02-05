@@ -17,7 +17,7 @@
   osx_defaults: domain=NSGlobalDomain key=com.apple.swipescrolldirection type=bool value=false
 
 - name: Enable tap to click for this user and for the login screen (1/2)
-  osx_defaults: domain=com.apple.driver.AppleBluetoothMultitouch.trackpad key=Clicking type=int value=2 state=present
+  osx_defaults: domain=com.apple.driver.AppleBluetoothMultitouch.trackpad key=Clicking type=bool value=true state=present
 
 - name: Enable tap to click for this user and for the login screen (2/2)
   osx_defaults: domain=NSGlobalDomain key=com.apple.mouse.tapBehavior type=int value=1
