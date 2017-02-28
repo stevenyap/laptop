@@ -26,6 +26,8 @@ Here's the list of items that the script installs:
 # TODOs
 - Set keyboard shortcut Cmd-e to show desktop
 - Set Mission Control to mouse button 3
+- Neovim: symlink config path `ln -s ~/.dotfiles/init.vim ~/.config/nvim/init.vim`
+- Neovim: pip3 install neovim for plugin deoplete
 
 # App Store to be installed manually
 - Witch
